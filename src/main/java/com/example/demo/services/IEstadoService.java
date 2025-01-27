@@ -12,5 +12,7 @@ public interface IEstadoService {
 	Estado buscarPorIdEstado(Integer id);
 	
 	void eliminar(Integer id);
+	
+	Estado buscarPorNombre(String nombre);
 
 }

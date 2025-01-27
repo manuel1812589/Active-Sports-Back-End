@@ -10,9 +10,9 @@ public class ProveedorDto implements Serializable{
 	
 	private String nombre;
 	
-	private String contacto;
+	private String telefono;
 	
-	private String direccion;
+	private String correo;
 
 	public ProveedorDto() {
 	}
@@ -33,20 +33,20 @@ public class ProveedorDto implements Serializable{
 		this.nombre = nombre;
 	}
 
-	public String getContacto() {
-		return contacto;
+	public String getTelefono() {
+		return telefono;
 	}
 
-	public void setContacto(String contacto) {
-		this.contacto = contacto;
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
-	public String getDireccion() {
-		return direccion;
+	public String getCorreo() {
+		return correo;
 	}
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 	
 }

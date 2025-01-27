@@ -17,5 +17,13 @@ public interface IProveedorService {
 	Proveedor guardarProveedor(Proveedor proveedor);
 	
 	void eliminar(Integer id);
+	
+    boolean existePorNombre(String nombre);
+    boolean existePorTelefono(String telefono);
+    boolean existePorCorreo(String correo);
+
+    boolean existePorNombreYDistintoId(String nombre, Integer id);
+    boolean existePorTelefonoYDistintoId(String telefono, Integer id);
+    boolean existePorCorreoYDistintoId(String correo, Integer id);
 
 }

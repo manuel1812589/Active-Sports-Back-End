@@ -51,5 +51,35 @@ public class ProveedorService implements IProveedorService{
 		proveedorDao.deleteById(id);
 		
 	}
+	
+    @Override
+    public boolean existePorNombre(String nombre) {
+        return proveedorDao.existsByNombre(nombre);
+    }
+
+    @Override
+    public boolean existePorTelefono(String telefono) {
+        return proveedorDao.existsByTelefono(telefono);
+    }
+
+    @Override
+    public boolean existePorCorreo(String correo) {
+        return proveedorDao.existsByCorreo(correo);
+    }
+
+    @Override
+    public boolean existePorNombreYDistintoId(String nombre, Integer id) {
+        return proveedorDao.existsByNombreAndIdNot(nombre, id);
+    }
+
+    @Override
+    public boolean existePorTelefonoYDistintoId(String telefono, Integer id) {
+        return proveedorDao.existsByTelefonoAndIdNot(telefono, id);
+    }
+
+    @Override
+    public boolean existePorCorreoYDistintoId(String correo, Integer id) {
+        return proveedorDao.existsByCorreoAndIdNot(correo, id);
+    }
 
 }

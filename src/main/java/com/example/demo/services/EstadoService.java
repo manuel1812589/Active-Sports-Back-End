@@ -31,5 +31,11 @@ public class EstadoService implements IEstadoService{
 	public void eliminar(Integer id) {
 		estadoDao.deleteById(id);
 	}
+	
+	@Override
+	public Estado buscarPorNombre(String nombre) {
+	    return estadoDao.findByNombreIgnoreCase(nombre);  
+	}
+
 
 }

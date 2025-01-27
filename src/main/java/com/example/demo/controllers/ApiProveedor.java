@@ -52,21 +52,40 @@ public class ApiProveedor {
 
 	@PostMapping("/agregar")
 	public ResponseEntity<Object> proveedorGuardar(@RequestBody Proveedor proveedor) {
-		proveedorService.guardarProveedor(proveedor);
-		return Utilidades.generateResponseTrue(HttpStatus.CREATED, "PROVEEDOR CREADO CORRECTAMENTE");
+	    if (proveedorService.existePorNombre(proveedor.getNombre())) {
+	        return Utilidades.generateResponse(HttpStatus.BAD_REQUEST, "YA EXISTE UN PROVEEDOR CON ESE NOMBRE");
+	    }
+	    if (proveedorService.existePorTelefono(proveedor.getTelefono())) {
+	        return Utilidades.generateResponse(HttpStatus.BAD_REQUEST, "YA EXISTE UN PROVEEDOR CON ESE TELÉFONO");
+	    }
+	    if (proveedorService.existePorCorreo(proveedor.getCorreo())) {
+	        return Utilidades.generateResponse(HttpStatus.BAD_REQUEST, "YA EXISTE UN PROVEEDOR CON ESE CORREO");
+	    }
+
+	    proveedorService.guardarProveedor(proveedor);
+	    return Utilidades.generateResponse(HttpStatus.CREATED, "PROVEEDOR CREADO CORRECTAMENTE");
 	}
 
 	@PutMapping("/actualizar")
 	public ResponseEntity<Object> proveedorActualizar(@RequestBody Proveedor proveedor) {
 
-		Proveedor proveedorBuscar = proveedorService.buscarIdProveedor(proveedor.getId());
+	    Proveedor proveedorBuscar = proveedorService.buscarIdProveedor(proveedor.getId());
+	    if (proveedorBuscar == null) {
+	        return Utilidades.generateResponse(HttpStatus.BAD_REQUEST, "NO SE ENCONTRÓ EL PROVEEDOR");
+	    }
 
-		if (proveedorBuscar == null) {
-			return Utilidades.generateResponse(HttpStatus.BAD_REQUEST, "NO SE ENCONTRÓ EL PROVEEDOR");
-		}
+	    if (proveedorService.existePorNombreYDistintoId(proveedor.getNombre(), proveedor.getId())) {
+	        return Utilidades.generateResponse(HttpStatus.BAD_REQUEST, "YA EXISTE OTRO PROVEEDOR CON ESE NOMBRE");
+	    }
+	    if (proveedorService.existePorTelefonoYDistintoId(proveedor.getTelefono(), proveedor.getId())) {
+	        return Utilidades.generateResponse(HttpStatus.BAD_REQUEST, "YA EXISTE OTRO PROVEEDOR CON ESE TELÉFONO");
+	    }
+	    if (proveedorService.existePorCorreoYDistintoId(proveedor.getCorreo(), proveedor.getId())) {
+	        return Utilidades.generateResponse(HttpStatus.BAD_REQUEST, "YA EXISTE OTRO PROVEEDOR CON ESE CORREO");
+	    }
 
-		proveedorService.guardarProveedor(proveedor);
-		return Utilidades.generateResponseTrue(HttpStatus.CREATED, "PROVEEDOR ACTUALIZADO CORRECTAMENTE");
+	    proveedorService.guardarProveedor(proveedor);
+	    return Utilidades.generateResponse(HttpStatus.CREATED, "PROVEEDOR ACTUALIZADO CORRECTAMENTE");
 	}
 
 	@PostMapping("/eliminar")
@@ -78,7 +97,7 @@ public class ApiProveedor {
 		}
 		
 		proveedorService.eliminar(proveedor.getId());
-		return Utilidades.generateResponseTrue(HttpStatus.OK, "PROVEEDOR ELIMINADO CORRECTAMENTE");
+		return Utilidades.generateResponse(HttpStatus.CREATED, "PROVEEDOR ELIMINADO CORRECTAMENTE");
 	}
 
 }
