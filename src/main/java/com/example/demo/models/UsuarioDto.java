@@ -66,5 +66,13 @@ public class UsuarioDto implements Serializable{
 		this.dni = dni;
 	}
 
+	public Rol getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Rol roles) {
+		this.roles = roles;
+	}
+
 	
 }
