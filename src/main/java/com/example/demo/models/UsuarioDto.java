@@ -16,7 +16,7 @@ public class UsuarioDto implements Serializable{
 	
 	private String password;
 	
-	private Set<RolDto> roles;
+	private Rol roles;
 	
 	private String nombre;
 	
@@ -48,14 +48,6 @@ public class UsuarioDto implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public Set<RolDto> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<RolDto> roles) {
-		this.roles = roles;
 	}
 
 	public String getNombre() {

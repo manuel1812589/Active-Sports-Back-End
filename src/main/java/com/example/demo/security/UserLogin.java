@@ -36,9 +36,11 @@ public class UserLogin implements UserDetailsService{
         }
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		
-		for(Rol role: usuario.get().getRoles()) {
-			authorities.add(new SimpleGrantedAuthority(role.getNombre()));
+		Rol role = usuario.get().getRoles();
+		if (role != null) {
+		    authorities.add(new SimpleGrantedAuthority(role.getNombre()));
 		}
+
 		
 		return new User(usuario.get().getCorreo(), usuario.get().getPassword(), authorities);
 	}

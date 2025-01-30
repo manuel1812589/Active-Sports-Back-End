@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Table(name="usuario")
@@ -29,12 +30,9 @@ public class Usuarios  implements Serializable{
 	
 	private Integer dni;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(
-			name="usuario_rol", 
-			joinColumns = { @JoinColumn(name="usuario_id") }, 
-			inverseJoinColumns = {@JoinColumn(name="rol_id")})	
-	private Set<Rol> roles;
+	@OneToOne()
+	@JoinColumn(name="rol_id")
+	private Rol roles;
 	
 	
 	public Usuarios() {
@@ -92,15 +90,14 @@ public class Usuarios  implements Serializable{
 	}
 
 
-	public Set<Rol> getRoles() {
+	public Rol getRoles() {
 		return roles;
 	}
 
 
-	public void setRoles(Set<Rol> roles) {
+	public void setRoles(Rol roles) {
 		this.roles = roles;
 	}
-
 	
 	
 }

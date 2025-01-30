@@ -1,8 +1,8 @@
 package com.example.demo.controllers;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,8 +44,9 @@ public class AccesoController {
 	        Optional<Usuarios> user = usuarioService.buscarPorCorreo(request.getCorreo());
 	        String accessToken = jwtUtil.generarToken(user.get());
 
-	        // Obtener los roles del usuario y devolverlos junto con el token
-	        List<String> roles = user.get().getRoles().stream().map(Rol::getNombre).collect(Collectors.toList());
+	        Rol role = user.get().getRoles();
+	        List<String> roles = (role != null) ? List.of(role.getNombre()) : Collections.emptyList();
+
 
 	        AuthResponse response = new AuthResponse(request.getCorreo(), accessToken, roles);
 	        
